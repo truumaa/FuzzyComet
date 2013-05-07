@@ -1,6 +1,9 @@
 #include "BasicFuzzyController.h"
 #include "../deffuzifyer/CentroidMethod.h"
 #include <iostream>
+
+using namespace std;
+
 namespace controller {
     using deffuzifyer::CentroidMethod;
     using deffuzifyer::DefuzzyerMethod;
@@ -29,7 +32,7 @@ namespace controller {
     }
 
     void BasicFuzzyController::fuzzify(const std::wstring &label, double val) {
-        cout << "FUZZIFYING...";
+        //cout << "FUZZIFYING...";
         for (std::vector<LinguisticVariable*>::const_iterator lv = variablesList.begin(); lv != variablesList.end(); ++lv) {
             if (BasicFuzzyController::caseInsensitiveStringCompare(label, (*lv)->getLabel())) {
                 (*lv)->fuzziffy(val);
@@ -50,11 +53,12 @@ namespace controller {
     }
 
     std::map<std::wstring, double> BasicFuzzyController::defuzzify(const std::wstring &label) {
-        cout << "DEFUZZIFYING...";
+        //cout << "DEFUZZIFYING...";
         setConfidencesOfConsequentsToZero();
         LinguisticVariable *lv = 0;
 
         for (std::vector<LinguisticVariable*>::const_iterator l = variablesList.begin(); l != variablesList.end(); ++l) {
+            //wcout<<"iteration-"<<(*l)->getLabel()<<" value-"<<(*l)->getBestLabel() <<"\n";
             if (BasicFuzzyController::caseInsensitiveStringCompare((*l)->getLabel(), label)) {
                 lv = *l;
             }

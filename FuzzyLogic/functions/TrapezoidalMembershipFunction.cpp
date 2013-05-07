@@ -1,4 +1,6 @@
 #include "TrapezoidalMembershipFunction.h"
+#include <limits>
+#include <iostream>
 
 namespace functions {
 
@@ -81,6 +83,7 @@ namespace functions {
         } else {
             result = clip;
         }
+        //std::cout<<"input: "<<input<<"--"<<clip<<"--"<<result<<"\n";
         return result;
     }
 
@@ -115,7 +118,7 @@ namespace functions {
         b = 0;
         c = 0;
         d = 0;
-        positiveInfinity = 99999999999999999;
-        negativeInfinity = -99999999999999999;
+        positiveInfinity = std::numeric_limits<double>::infinity();
+        negativeInfinity = -std::numeric_limits<double>::infinity();
     }
 }

@@ -17,9 +17,24 @@ using modifier::FzSet;
 using variables::LinguisticVariable;
 using std::cout;
 
-double positiveInfini = 99999999999999999;
+double positiveInfini = std::numeric_limits<double>::infinity();
 
-int main(int arg, char* argc[]){
+int main(int argc, char **argv) {
+    FuzzyLogicEngine *fle = new FuzzyLogicEngine();
+    fle->testFuzzy(10,10,10);
+}
+
+
+bool dump_map(const std::map<std::wstring, double>& map) {
+  for ( std::map<std::wstring, double>::const_iterator it = map.begin(); it != map.end(); it++) {
+      if(it->second >= 60)
+          return true;
+      else
+          return false;
+  }
+}
+
+bool FuzzyLogicEngine::testFuzzy(int bandwidth, int cpu, int connections){
     BasicFuzzyController *bfc = new BasicFuzzyController();
     FuzzyLogicEngine *fle = new FuzzyLogicEngine();
 
@@ -27,16 +42,16 @@ int main(int arg, char* argc[]){
     fle->createRules(bfc);
 
     //Here input to value is introduced
-    bfc->fuzzify(L"BANDWIDTH", 100);
-    bfc->fuzzify(L"CPULOAD", 10);
-    bfc->fuzzify(L"CONNECTIONS", 150);
+    bfc->fuzzify(L"BANDWIDTH", double(bandwidth));
+    bfc->fuzzify(L"CPULOAD", double(cpu));
+    bfc->fuzzify(L"CONNECTIONS", double(connections));
 
     CentroidMethod *cm = new CentroidMethod();
     cm->setSamplesPoints(10);
     bfc->setDefuzzifyerMethod(cm);
 
-    return 0;
-    //cout << L"Delegate with a grade of truth to: " + bfc->defuzzify(L"OFFLOAD") << "\n";
+    //cout << L"Delegate with a grade of truth to2: ";
+    return dump_map(bfc->defuzzify(L"OFFLOAD"));
 
 }
 
@@ -52,7 +67,7 @@ void FuzzyLogicEngine::createVariables(BasicFuzzyController *bfc) {
         LinguisticVariable *mv2 = new LinguisticVariable(L"CPULOAD");
         loadLow = mv2->addSet(L"CPU Low", new TrapezoidalMembershipFunction(double(0), double(9), double(18), double(36)));
         loadNormal = mv2->addSet(L"CPU Normal", new TrapezoidalMembershipFunction(double(27), double(45), double(54), double(72)));
-        loadHigh = mv2->addSet(L"CPU High", new TrapezoidalMembershipFunction(63, 81, 90, positiveInfini));
+        loadHigh = mv2->addSet(L"CPU High", new TrapezoidalMembershipFunction(double(63), double(81), double(90), positiveInfini));
         bfc->addVariable(mv2);
 
         LinguisticVariable *cv1 = new LinguisticVariable(L"CONNECTIONS");

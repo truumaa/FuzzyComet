@@ -1,4 +1,5 @@
 #include "FuzzyOR.h"
+#include <limits>
 
 namespace comparator {
     using rules::FuzzyTerm;
@@ -25,7 +26,7 @@ namespace comparator {
     }
 
     double FuzzyOR::getDOM() {
-        double minDOM = -99999999999999999;
+        double minDOM = -std::numeric_limits<double>::infinity();
         for (std::vector<FuzzyTerm*>::const_iterator t = terms.begin(); t != terms.end(); ++t) {
             if ((*t)->getDOM() > minDOM) {
                 minDOM = (*t)->getDOM();

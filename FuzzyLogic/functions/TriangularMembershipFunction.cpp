@@ -58,6 +58,8 @@ namespace functions {
                 return clip;
             }
         }
+
+        //std::cout<<"input: "<<input<<"--"<<clip<<"--"<<result<<"\n";
         return result;
     }
 

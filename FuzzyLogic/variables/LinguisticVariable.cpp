@@ -7,7 +7,7 @@ namespace variables {
 
     LinguisticVariable::LinguisticVariable(const std::wstring &label) {
         this->label = label;
-        possibleValues = std::vector<FuzzySet*>();
+        //possibleValues = std::vector<FuzzySet*>();
     }
 
     std::vector<FuzzySet*> LinguisticVariable::getSetList() {
@@ -32,7 +32,6 @@ namespace variables {
                 //throw IllegalSetException();
             }
         }
-
         possibleValues.push_back(set);
         return new FzSet(set);
 

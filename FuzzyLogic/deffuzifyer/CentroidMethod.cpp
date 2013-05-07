@@ -16,13 +16,16 @@ namespace deffuzifyer {
         setList = lv->getSetList();
         max = lv->getMax();
         min = lv->getMin();
-
         double jump = (max - min) / s;
         double sumAreas = 0;
         double sumCont = 0;
 
         double areas[s];
         double values[s];
+        for(int i = 0; i < s; i++){
+            values[i] = 0;
+            areas[i] = 0;
+        }
         double flag = min + jump;
         for (int i = 0; i < s; i++) {
             for (std::vector<FuzzySet*>::const_iterator fs = setList.begin(); fs != setList.end(); ++fs) {

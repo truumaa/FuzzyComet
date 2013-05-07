@@ -1,9 +1,10 @@
 #pragma once
 
 #include "MembershipFunction.h"
+#include <limits>
 
-double positiveInfinity = 99999999999999999;
-double negativeInfinity = -99999999999999999;
+double positiveInfinity = std::numeric_limits<double>::infinity();
+double negativeInfinity = -std::numeric_limits<double>::infinity();
 
 namespace functions {
     class TriangularMembershipFunction: public MembershipFunction {

@@ -39,4 +39,5 @@ class FuzzyLogicEngine {
     public:
         virtual void createVariables(BasicFuzzyController *bfc);
         virtual void createRules(BasicFuzzyController *bfc);
+        virtual bool testFuzzy(int bandwidth, int cpu, int connections);
 };

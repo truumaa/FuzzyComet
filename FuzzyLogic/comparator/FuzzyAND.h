@@ -3,6 +3,7 @@
 #include "../rules/FuzzyTerm.h"
 #include <vector>
 #include <iostream>
+#include <limits>
 
 namespace comparator {
     using rules::FuzzyTerm;
