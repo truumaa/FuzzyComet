@@ -79,6 +79,7 @@ namespace controller {
             //return defMethod.getDefuzziedValue(lv);
             return values;
         }
+        return std::map<std::wstring, double>();
     }
 
     void BasicFuzzyController::setConfidencesOfConsequentsToZero() {
