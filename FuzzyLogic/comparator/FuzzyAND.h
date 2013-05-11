@@ -16,5 +16,6 @@ namespace comparator {
             virtual double getDOM();
             virtual void clearDOM();
             virtual void orWithDOM(double val);
+            virtual ~FuzzyAND(){}
     };
 }

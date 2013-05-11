@@ -30,6 +30,7 @@ namespace comparator
 		virtual void clearDOM();
 
 		virtual void orWithDOM(double val);
+		virtual ~FuzzyNOT(){}
 	};
 
 }

@@ -9,5 +9,6 @@ namespace functions
 		virtual double getClippedValue(double input, double clip) = 0;
 		virtual double getMax() = 0;
 		virtual double getMin() = 0;
+		virtual ~MembershipFunction(){}
 	};
 }

@@ -30,6 +30,7 @@ namespace controller {
             virtual void addRule(FuzzyTerm *ant, FuzzyTerm *con);
             virtual void fuzzify(const std::wstring &label, double val);
             virtual std::map<std::wstring, double> defuzzify(const std::wstring &label);
+            virtual ~BasicFuzzyController(){}
         private:
             void setConfidencesOfConsequentsToZero();
             bool caseInsensitiveStringCompare(const std::wstring& str1, const std::wstring& str2);
