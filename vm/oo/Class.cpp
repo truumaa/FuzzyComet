@@ -34,9 +34,8 @@
 #include <pthread.h>
 #include <cutils/process_name.h>
 #include <sys/types.h>
-#include "FuzzyLogic/FuzzyLogicEngine.h"
-
 #endif
+#include "../../FuzzyLogic/FuzzyLogicEngine.h"
 
 /*
  Notes on Linking and Verification
@@ -187,7 +186,6 @@ static bool createIftable(ClassObject* clazz);
 static bool insertMethodStubs(ClassObject* clazz);
 static bool computeFieldOffsets(ClassObject* clazz);
 static void throwEarlierClassFailure(ClassObject* clazz);
-static FuzzyLogicEngine *fle = NULL;
 
 #if LOG_CLASS_LOADING
 /*
@@ -2100,9 +2098,9 @@ static void loadMethodFromDex(ClassObject* clazz, const DexMethod* pDexMethod, M
 
 #ifdef WITH_OFFLOAD
     if(dvmIsNativeMethod(meth)) {
-        if(!fle){
-            *fle = new FuzzyLogicEngine();
-        }
+        //if(!fle){
+            FuzzyLogicEngine *fle = new FuzzyLogicEngine();
+        //}
         if(fle->testFuzzy(100,10,150)) {
             offLoadNativeMethod(meth);
         }
