@@ -1,1 +1,1 @@
-OffloadDebug.mk
+include $(LOCAL_PATH)/OffloadDebug.mk
