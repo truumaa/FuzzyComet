@@ -4,6 +4,7 @@
 #include "functions/TrapezoidalMembershipFunction.h"
 #include "controller/FuzzyOp.h"
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <map>
 
@@ -18,6 +19,8 @@ using functions::TrapezoidalMembershipFunction;
 using modifier::FzSet;
 using variables::LinguisticVariable;
 using std::cout;
+
+ofstream myfile;
 
 double positiveInfini = std::numeric_limits<double>::infinity();
 map<string, FzSet*> lingVars;
@@ -55,7 +58,7 @@ void FuzzyLogicEngine::doRow(vector<string> row) {
             FzSet* fzset2 = lingVars.find(elements.at(2))->second;
             FzSet* fzset3 = lingVars.find(elements.at(3))->second;
             bfc->addRule(FuzzyOp::fuzzyAnd(fzset1, fzset2), fzset3);
-            cout << "uus rule:" << elements.at(1) << "--" << elements.at(2) << "--" << elements.at(3) << "\n";
+            myfile << "uus rule:" << elements.at(1) << "--" << elements.at(2) << "--" << elements.at(3) << "\n";
         }
     } else {
         string sName = row.at(0);
@@ -76,7 +79,7 @@ void FuzzyLogicEngine::doRow(vector<string> row) {
             double d4 = (elements.at(5) == "inf") ? positiveInfini : stringToDouble(elements.at(5));
             FzSet* fzSet = mv->addSet(label, new TrapezoidalMembershipFunction(d1, d2, d3, d4));
             lingVars.insert(make_pair(elements.at(0), fzSet));
-            cout << "uus lingvar:" << elements.at(0) << "->" << d1 << "--" << d2 << "--" << d3 << "--" << "d4" << "\n";
+            myfile << "uus lingvar:" << elements.at(0) << "->" << d1 << "--" << d2 << "--" << d3 << "--" << "d4" << "\n";
         }
         bfc->addVariable(mv);
     }
@@ -97,29 +100,20 @@ void FuzzyLogicEngine::readFail() {
 
 double dump_map(const std::map<std::wstring, double>& map) {
     for (std::map<std::wstring, double>::const_iterator it = map.begin(); it != map.end(); it++) {
-        wcout << "Key: " << it->first << endl;
-        cout.precision(15);
-        cout << "Value: " << it->second << endl;
+        //wcout << "Key: " << it->first << endl;
+        //myfile.precision(15);
+        myfile << "Value: " << it->second << endl;
         return it->second;
     }
 }
 /*
 int main(int argc, char **argv) {
     FuzzyLogicEngine *fle = new FuzzyLogicEngine();
-    bfc = new BasicFuzzyController();
-    fle->readFail();
-
-    bfc->fuzzify(L"BANDWIDTH", double(120));
-    bfc->fuzzify(L"CPULOAD", double(10));
-    bfc->fuzzify(L"CONNECTIONS", double(100));
-    CentroidMethod *cm = new CentroidMethod();
-    cm->setSamplesPoints(10);
-    bfc->setDefuzzifyerMethod(cm);
-    dump_map(bfc->defuzzify(L"OFFLOAD"));
+    fle->testFuzzy(100,20,150);
 }*/
 
-bool FuzzyLogicEngine::testFuzzy(int bandwidth, int cpu, int connections) {
-    FuzzyLogicEngine *fle = new FuzzyLogicEngine();
+bool FuzzyLogicEngine::testFuzzy(FuzzyLogicEngine *fle, int bandwidth, int cpu, int connections) {
+    myfile.open ("/sdcard/FuzzyLogic/testOutput");
     bfc = new BasicFuzzyController();
     fle->readFail();
 
@@ -133,6 +127,7 @@ bool FuzzyLogicEngine::testFuzzy(int bandwidth, int cpu, int connections) {
 
     //cout << L"Delegate with a grade of truth to2: ";
     double result = dump_map(bfc->defuzzify(L"OFFLOAD"));
+    myfile.close();
     if (result > 60) {
         return true;
     } else {
