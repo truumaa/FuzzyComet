@@ -18,5 +18,5 @@ class FuzzyLogicEngine {
         virtual void doRow(std::vector<std::string> row);
         virtual void readFail();
         virtual bool testFuzzy(int bandwidth, int cpu, int connections);
-        virtual ~FuzzyLogicEngine(){}
+        virtual ~FuzzyLogicEngine();
 };

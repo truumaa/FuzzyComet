@@ -88,6 +88,8 @@ void FuzzyLogicEngine::doRow(vector<string> row) {
     }
 }
 
+FuzzyLogicEngine::~FuzzyLogicEngine(){}
+
 void FuzzyLogicEngine::readFail() {
     string line;
     ifstream myfile("testData");
