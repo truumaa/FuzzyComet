@@ -19,27 +19,27 @@
 LOCAL_PATH:= $(call my-dir)
 
 local_src_files := \
-		comparator/Comparator.cpp
-		comparator/FuzzyAND.cpp
-		comparator/FuzzyNOT.cpp
-		comparator/FuzzyOR.cpp		
-		controller/BasicFuzzyController.cpp
-		controller/FuzzyController.cpp
-		controller/FuzzyOp.cpp
-		controller/UnsupportedOperationException.cpp		
-		deffuzifyer/ControidMethod.cpp
-		deffuzifyer/DefuzzyerMethod.cpp		
-		functions/MembershipFunction.cpp
-		functions/TrapezoidalMembershipFunction.cpp
-		functions/TriangularMembershipFunction.cpp		
-		modifier/FzSet.cpp
-		modifier/Modifier.cpp		
-		rules/FuzzyTerm.cpp
-		rules/Rule.cpp
-		variables/FuzzySet.cpp
-		variables/IllegalSetException.cpp
-		variables/LinguisticVariable.cpp
-		FuzzyLogicEngine.cpp
+		comparator/Comparator.cpp \
+		comparator/FuzzyAND.cpp \
+		comparator/FuzzyNOT.cpp \
+		comparator/FuzzyOR.cpp	 \
+		controller/BasicFuzzyController.cpp \
+		controller/FuzzyController.cpp \
+		controller/FuzzyOp.cpp \
+		controller/UnsupportedOperationException.cpp \	
+		deffuzifyer/ControidMethod.cpp \
+		deffuzifyer/DefuzzyerMethod.cpp \		
+		functions/MembershipFunction.cpp \
+		functions/TrapezoidalMembershipFunction.cpp \
+		functions/TriangularMembershipFunction.cpp \	
+		modifier/FzSet.cpp \
+		modifier/Modifier.cpp \		
+		rules/FuzzyTerm.cpp \
+		rules/Rule.cpp \
+		variables/FuzzySet.cpp \
+		variables/IllegalSetException.cpp \
+		variables/LinguisticVariable.cpp \
+		FuzzyLogicEngine.cpp \
 
 local_c_includes := \
 
