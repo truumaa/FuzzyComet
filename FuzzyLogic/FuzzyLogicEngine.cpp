@@ -3,10 +3,6 @@
 #include "variables/LinguisticVariable.h"
 #include "functions/TrapezoidalMembershipFunction.h"
 #include "controller/FuzzyOp.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <map>
 
 using namespace controller;
 using namespace variables;
@@ -20,16 +16,8 @@ using modifier::FzSet;
 using variables::LinguisticVariable;
 using std::cout;
 
-ofstream myfile;
 
-
-
-double positiveInfini = std::numeric_limits<double>::infinity();
-map<string, FzSet*> lingVars;
-BasicFuzzyController *bfc;
-FuzzyLogicEngine *fle;
-
-double stringToDouble(const std::string& s) {
+double FuzzyLogicEngine::stringToDouble(const std::string& s) {
     std::istringstream i(s);
     double x;
     if (!(i >> x))
@@ -37,7 +25,7 @@ double stringToDouble(const std::string& s) {
     return x;
 }
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+std::vector<std::string> FuzzyLogicEngine::split(const std::string &s, char delim, std::vector<std::string> &elems) {
     std::stringstream ss(s);
     std::string item;
     while (std::getline(ss, item, delim)) {
@@ -46,11 +34,13 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
     return elems;
 }
 
-std::vector<std::string> split(const std::string &s, char delim) {
+std::vector<std::string> FuzzyLogicEngine::split(const std::string &s, char delim) {
     std::vector<std::string> elems;
     split(s, delim, elems);
     return elems;
 }
+
+FuzzyLogicEngine::~FuzzyLogicEngine(){}
 
 void FuzzyLogicEngine::doRow(vector<string> row) {
 
@@ -88,11 +78,9 @@ void FuzzyLogicEngine::doRow(vector<string> row) {
     }
 }
 
-FuzzyLogicEngine::~FuzzyLogicEngine(){}
-
 void FuzzyLogicEngine::readFail() {
     string line;
-    ifstream myfile("testData");
+    ifstream myfile("/sdcard/FuzzyLogic/testData");
     if (myfile.is_open()) {
         while (myfile.good()) {
             getline(myfile, line);
@@ -103,7 +91,7 @@ void FuzzyLogicEngine::readFail() {
     }
 }
 
-double dump_map(const std::map<std::wstring, double>& map) {
+double FuzzyLogicEngine::dump_map(const std::map<std::wstring, double>& map) {
     for (std::map<std::wstring, double>::const_iterator it = map.begin(); it != map.end(); it++) {
         //wcout << "Key: " << it->first << endl;
         //myfile.precision(15);
@@ -120,8 +108,9 @@ int main(int argc, char **argv) {
 
 bool FuzzyLogicEngine::testFuzzy(int bandwidth, int cpu, int connections) {
     if (fle == 0) {
+        positiveInfini = std::numeric_limits<double>::infinity();
         fle = new FuzzyLogicEngine();
-        myfile.open("testOutput");
+        myfile.open("/sdcard/FuzzyLogic/testOutput");
         bfc = new BasicFuzzyController();
         fle->readFail();
     }
